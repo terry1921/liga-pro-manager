@@ -1,4 +1,4 @@
-package dev.terryrockstar.example
+package dev.terryrockstar.ligapromanager
 
 import org.junit.Test
 
