@@ -1,5 +1,7 @@
 package dev.terryrockstar.ligapromanager
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -27,7 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -35,8 +37,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dev.terryrockstar.ligapromanager.calendar.CalendarScreen
+import dev.terryrockstar.ligapromanager.standing.StandingsContent
 import dev.terryrockstar.ligapromanager.standing.StandingsScreen
 import dev.terryrockstar.ligapromanager.teams.TeamsScreen
+import dev.terryrockstar.ligapromanager.ui.theme.LigaProTheme
+import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
+import dev.terryrockstar.ligapromanager.utils.DataMock
 
 object NavRoutes {
     const val STANDINGS = "standings"
@@ -53,7 +59,7 @@ fun MainScreen() {
     Scaffold(
         topBar = {
             TopAppBarWithNavigation(
-                title = "LigaPro\nManager",
+                currentRoute = currentRoute ?: NavRoutes.STANDINGS,
                 showBack = currentRoute != NavRoutes.STANDINGS,
                 onBack = {
                     navController.popBackStack()
@@ -65,18 +71,22 @@ fun MainScreen() {
         }
     ) { paddingValues ->
         NavHost(
+            modifier = Modifier.padding(paddingValues),
             navController = navController,
             startDestination = NavRoutes.STANDINGS,
-            modifier = Modifier.padding(paddingValues)
+            enterTransition = { slideInHorizontally { it } },
+            exitTransition = { slideOutHorizontally { it } },
+            popEnterTransition = { slideInHorizontally { it } },
+            popExitTransition = { slideOutHorizontally { it } }
         ) {
             composable(NavRoutes.STANDINGS) {
-                StandingsScreen() // con ViewModel ya conectado
+                StandingsScreen(paddingValues) // con ViewModel ya conectado
             }
             composable(NavRoutes.CALENDAR) {
-                CalendarScreen() // tu otra pantalla
+                CalendarScreen(paddingValues) // tu otra pantalla
             }
             composable(NavRoutes.TEAMS) {
-                TeamsScreen() // tu otra pantalla
+                TeamsScreen(paddingValues) // tu otra pantalla
             }
         }
     }
@@ -85,15 +95,20 @@ fun MainScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBarWithNavigation(
-    title: String,
+    currentRoute: String,
     showBack: Boolean,
     onBack: () -> Unit
 ) {
+    val title = when (currentRoute) {
+        NavRoutes.CALENDAR -> "Calendario"
+        NavRoutes.TEAMS -> "Equipos"
+        else -> "Liga Pro-Manager"
+    }
     TopAppBar(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Default.EmojiEvents, contentDescription = null)
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.size2))
                 Text(
                     title,
                     lineHeight = 20.sp,
@@ -151,3 +166,49 @@ data class NavItem(
     val icon: ImageVector,
     val route: String
 )
+
+@Composable
+fun PreviewScreenForRoute(currentRoute: String) {
+    LigaProTheme(useDarkTheme = true) {
+        Scaffold(
+            topBar = {
+                TopAppBarWithNavigation(
+                    currentRoute = currentRoute,
+                    showBack = currentRoute != NavRoutes.STANDINGS,
+                    onBack = {}
+                )
+            },
+            bottomBar = {
+                BottomNavBar(
+                    navController = rememberNavController(), // simulado
+                    currentRoute = currentRoute
+                )
+            }
+        ) { padding ->
+            when (currentRoute) {
+                NavRoutes.STANDINGS -> StandingsContent(teams = DataMock.TEAMS_STANDINGS)
+
+                NavRoutes.CALENDAR -> CalendarScreen(padding)
+                NavRoutes.TEAMS -> TeamsScreen(padding)
+            }
+        }
+    }
+}
+
+@Preview(name = "Preview Estadísticas", showBackground = true, showSystemUi = true)
+@Composable
+fun PreviewMainScreenStandings() {
+    PreviewScreenForRoute(currentRoute = NavRoutes.STANDINGS)
+}
+
+@Preview(name = "Preview Calendario", showBackground = true, showSystemUi = true)
+@Composable
+fun PreviewMainScreenCalendar() {
+    PreviewScreenForRoute(currentRoute = NavRoutes.CALENDAR)
+}
+
+@Preview(name = "Preview Equipos", showBackground = true, showSystemUi = true)
+@Composable
+fun PreviewMainScreenTeams() {
+    PreviewScreenForRoute(currentRoute = NavRoutes.TEAMS)
+}
