@@ -1,5 +1,6 @@
 package dev.terryrockstar.ligapromanager.utils
 
+import dev.terryrockstar.core.database.entity.MatchEntity
 import dev.terryrockstar.core.model.standings.TeamStanding
 
 data object DataMock {
@@ -20,5 +21,9 @@ data object DataMock {
         TeamStanding(14, "Villas", 15, 4, 4, 7, 30, 41, points = 16),
         TeamStanding(15, "San roque", 15, 2, 4, 9, 24, 37, points = 10),
         TeamStanding(16, "Tigres", 15, 2, 0, 13, 24, 62, points = 6)
+    )
+    val MATCHES = listOf(
+        MatchEntity(homeTeam = "Loros FC", awayTeam = "Tigres", date = "Dom 20 Abr"),
+        MatchEntity(homeTeam = "Galacticos", awayTeam = "Jaguares", date = "Dom 27 Abr")
     )
 }

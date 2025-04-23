@@ -21,6 +21,7 @@ private val DarkColorScheme = darkColorScheme(
     outline = Color(0xFF868690),
     outlineVariant = Color(0xFF4C9784),
     scrim = Color.White,
+    inverseOnSurface = Color(0xFFDEDEDE),
 )
 
 private val LightColorScheme = lightColorScheme(

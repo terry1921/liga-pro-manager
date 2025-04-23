@@ -43,7 +43,7 @@ fun StandingsScreen(
     paddingValues: PaddingValues,
     viewModel: StandingsViewModel = hiltViewModel()
 ) {
-    Timber.tag("StandingsScreen").d("padding values -> $paddingValues")
+    Timber.tag("PaddingValues").d("padding values -> $paddingValues")
     val teams by viewModel.standings.collectAsState()
     LaunchedEffect(Unit) { viewModel.preloadData() }
     StandingsContent(teams)

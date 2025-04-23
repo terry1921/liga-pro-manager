@@ -36,6 +36,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import dev.terryrockstar.core.database.entity.toUI
+import dev.terryrockstar.ligapromanager.calendar.CalendarContent
 import dev.terryrockstar.ligapromanager.calendar.CalendarScreen
 import dev.terryrockstar.ligapromanager.standing.StandingsContent
 import dev.terryrockstar.ligapromanager.standing.StandingsScreen
@@ -188,7 +190,7 @@ fun PreviewScreenForRoute(currentRoute: String) {
             when (currentRoute) {
                 NavRoutes.STANDINGS -> StandingsContent(teams = DataMock.TEAMS_STANDINGS)
 
-                NavRoutes.CALENDAR -> CalendarScreen(padding)
+                NavRoutes.CALENDAR -> CalendarContent(matches = DataMock.MATCHES.toUI())
                 NavRoutes.TEAMS -> TeamsScreen(padding)
             }
         }

@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.room)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.ksp)
 }
@@ -19,9 +20,17 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.expandProjection" to "true"
+                )
+            }
         }
+    }
+    room {
+        schemaDirectory("$projectDir/schemas")
     }
     buildFeatures {
         buildConfig = true
@@ -67,7 +76,7 @@ dependencies {
     // database
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
     testImplementation(libs.androidx.arch.core)
 
     // json parsing
