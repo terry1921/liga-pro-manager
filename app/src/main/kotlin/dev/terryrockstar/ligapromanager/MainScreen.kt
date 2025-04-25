@@ -101,13 +101,14 @@ fun MainScreen() {
             }
             composable(
                 "matchDetail/{matchId}", arguments = listOf(
-                navArgument("matchId") { type = NavType.IntType }
-            )) { backStackEntry ->
+                    navArgument("matchId") { type = NavType.IntType }
+                )) { backStackEntry ->
                 val matchId = backStackEntry.arguments?.getInt("matchId") ?: return@composable
                 MatchDetailScreen(matchId = matchId)
             }
 
-            composable("teamDetail/{teamId}", arguments = listOf(
+            composable(
+                "teamDetail/{teamId}", arguments = listOf(
                 navArgument("teamId") { type = NavType.IntType }
             )) { backStack ->
                 val teamId = backStack.arguments?.getInt("teamId") ?: return@composable
@@ -144,7 +145,7 @@ fun TopAppBarWithNavigation(
         navigationIcon = {
             if (showBack) {
                 IconButton(onClick = onBack) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = "Back")
                 }
             }
         }
