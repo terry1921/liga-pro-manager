@@ -2,6 +2,7 @@ package dev.terryrockstar.core.database.team
 
 import dev.terryrockstar.core.database.dao.PlayerDao
 import dev.terryrockstar.core.database.dao.TeamDao
+import dev.terryrockstar.core.database.entity.PlayerEntity
 import dev.terryrockstar.core.database.entity.TeamEntity
 import dev.terryrockstar.core.database.entity.toCard
 import dev.terryrockstar.core.database.entity.toEntity
@@ -32,6 +33,10 @@ class TeamRepository @Inject constructor(
     }
 
     suspend fun insertTeams(list: List<TeamEntity>) {
-        teamDao.insertAll(list.map { it })
+        teamDao.insertAll(list)
+    }
+
+    suspend fun insertPlayers(list: List<PlayerEntity>) {
+        playerDao.insertPlayers(list)
     }
 }

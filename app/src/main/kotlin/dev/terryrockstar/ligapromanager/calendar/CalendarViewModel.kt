@@ -23,7 +23,10 @@ class CalendarViewModel @Inject constructor(
 
     fun preload() {
         viewModelScope.launch {
-            repository.preload(DataMock.MATCHES)
+            if (matches.value.isEmpty()) {
+                // Preload data only if the matches are empty
+                repository.preload(DataMock.MATCHES)
+            }
         }
     }
 }
