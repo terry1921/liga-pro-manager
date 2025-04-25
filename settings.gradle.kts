@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Android Template"
+rootProject.name = "LigaPro Manager"
 include(":app")
 include(":core-data")
 include(":core-database")

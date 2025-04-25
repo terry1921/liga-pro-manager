@@ -9,11 +9,11 @@ plugins {
 
 android {
     kapt.includeCompileClasspath = true
-    namespace = "dev.terryrockstar.example"
+    namespace = "dev.terryrockstar.ligapromanager"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "dev.terryrockstar.example"
+        applicationId = "dev.terryrockstar.ligapromanager"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -61,7 +61,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.12"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     hilt {
         enableAggregatingTask = true
@@ -88,6 +88,12 @@ composeCompiler {
 }
 
 dependencies {
+    // modules
+    implementation(project(":core-data"))
+
+    // modules for unit test
+    testImplementation(project(":core-network"))
+    testImplementation(project(":core-database"))
 
     // androidx
     implementation(libs.material)
@@ -100,11 +106,24 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.swiperefreshlayout)
 
+    // compose
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.ui.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.icons.extended)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+    debugImplementation(libs.compose.ui.tooling)
+
     // data binding
     implementation(libs.bindables)
 
     // di
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.testing)
     kaptAndroidTest(libs.hilt.compiler)
@@ -140,5 +159,5 @@ dependencies {
     androidTestImplementation(libs.truth)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
-    //androidTestImplementation(libs.android.test.runner)
+    androidTestImplementation(libs.android.test.runner)
 }
