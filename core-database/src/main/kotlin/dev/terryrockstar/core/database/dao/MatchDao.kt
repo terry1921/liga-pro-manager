@@ -14,4 +14,7 @@ interface MatchDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(matches: List<MatchEntity>)
+
+    @Query("SELECT * FROM matches WHERE id = :id")
+    fun getMatchById(id: Int): Flow<MatchEntity?>
 }

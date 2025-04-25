@@ -8,9 +8,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.terryrockstar.core.database.dao.MatchDao
+import dev.terryrockstar.core.database.dao.PlayerDao
+import dev.terryrockstar.core.database.dao.TeamDao
 import dev.terryrockstar.core.database.dao.TeamStandingDao
 import dev.terryrockstar.core.database.match.MatchRepository
 import dev.terryrockstar.core.database.standings.TeamStandingRepository
+import dev.terryrockstar.core.database.team.TeamRepository
 import javax.inject.Singleton
 
 @Module
@@ -35,4 +38,14 @@ object AppModule {
     @Provides
     fun provideMatchRepository(dao: MatchDao): MatchRepository =
         MatchRepository(dao)
+
+    @Provides
+    fun provideTeamDao(db: AppDatabase): TeamDao = db.teamDao()
+
+    @Provides
+    fun providePlayerDao(db: AppDatabase): PlayerDao = db.playerDao()
+
+    @Provides
+    fun provideTeamRepository(teamDao: TeamDao, playerDao: PlayerDao): TeamRepository = TeamRepository(teamDao, playerDao)
+
 }

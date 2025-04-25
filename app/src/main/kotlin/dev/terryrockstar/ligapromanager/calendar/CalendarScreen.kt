@@ -14,13 +14,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import dev.terryrockstar.core.model.match.MatchUi
+import dev.terryrockstar.core.model.match.MatchData
 import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
 import timber.log.Timber
 
 @Composable
 fun CalendarScreen(
     paddingValues: PaddingValues,
+    navigateToMatchDetail: (Int) -> Unit,
     viewModel: CalendarViewModel = hiltViewModel()
 ) {
     Timber.tag("PaddingValues").d("padding values -> $paddingValues")
@@ -28,14 +29,14 @@ fun CalendarScreen(
     val matches by viewModel.matches.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.preload() // Solo para pruebas
+        viewModel.preload()
     }
 
-    CalendarContent(matches)
+    CalendarContent(matches, navigateToMatchDetail)
 }
 
 @Composable
-fun CalendarContent(matches: List<MatchUi>) {
+fun CalendarContent(matches: List<MatchData>, navigateToMatchDetail: (Int) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,7 +51,9 @@ fun CalendarContent(matches: List<MatchUi>) {
         Spacer(modifier = Modifier.height(Dimens.size3))
 
         matches.forEach { match ->
-            MatchCard(match)
+            MatchCard(match = match) {
+                navigateToMatchDetail.invoke(match.id)
+            }
             Spacer(modifier = Modifier.height(Dimens.size2))
         }
 

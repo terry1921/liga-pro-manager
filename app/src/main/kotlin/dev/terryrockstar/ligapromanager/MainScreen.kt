@@ -32,15 +32,20 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import dev.terryrockstar.core.database.entity.toUI
+import androidx.navigation.navArgument
+import dev.terryrockstar.core.database.entity.toCard
 import dev.terryrockstar.ligapromanager.calendar.CalendarContent
 import dev.terryrockstar.ligapromanager.calendar.CalendarScreen
+import dev.terryrockstar.ligapromanager.calendar.MatchDetailScreen
 import dev.terryrockstar.ligapromanager.standing.StandingsContent
 import dev.terryrockstar.ligapromanager.standing.StandingsScreen
+import dev.terryrockstar.ligapromanager.teams.TeamDetailScreen
+import dev.terryrockstar.ligapromanager.teams.TeamsContent
 import dev.terryrockstar.ligapromanager.teams.TeamsScreen
 import dev.terryrockstar.ligapromanager.ui.theme.LigaProTheme
 import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
@@ -82,13 +87,31 @@ fun MainScreen() {
             popExitTransition = { slideOutHorizontally { it } }
         ) {
             composable(NavRoutes.STANDINGS) {
-                StandingsScreen(paddingValues) // con ViewModel ya conectado
+                StandingsScreen(paddingValues)
             }
             composable(NavRoutes.CALENDAR) {
-                CalendarScreen(paddingValues) // tu otra pantalla
+                CalendarScreen(paddingValues, navigateToMatchDetail = { matchId ->
+                    navController.navigate("matchDetail/${matchId}")
+                })
             }
             composable(NavRoutes.TEAMS) {
-                TeamsScreen(paddingValues) // tu otra pantalla
+                TeamsScreen(paddingValues, navigateToTeamDetail = { teamId ->
+                    navController.navigate("teamDetail/${teamId}")
+                })
+            }
+            composable(
+                "matchDetail/{matchId}", arguments = listOf(
+                navArgument("matchId") { type = NavType.IntType }
+            )) { backStackEntry ->
+                val matchId = backStackEntry.arguments?.getInt("matchId") ?: return@composable
+                MatchDetailScreen(matchId = matchId)
+            }
+
+            composable("teamDetail/{teamId}", arguments = listOf(
+                navArgument("teamId") { type = NavType.IntType }
+            )) { backStack ->
+                val teamId = backStack.arguments?.getInt("teamId") ?: return@composable
+                TeamDetailScreen(teamId = teamId)
             }
         }
     }
@@ -182,16 +205,22 @@ fun PreviewScreenForRoute(currentRoute: String) {
             },
             bottomBar = {
                 BottomNavBar(
-                    navController = rememberNavController(), // simulado
+                    navController = rememberNavController(),
                     currentRoute = currentRoute
                 )
             }
-        ) { padding ->
+        ) { _ ->
             when (currentRoute) {
                 NavRoutes.STANDINGS -> StandingsContent(teams = DataMock.TEAMS_STANDINGS)
 
-                NavRoutes.CALENDAR -> CalendarContent(matches = DataMock.MATCHES.toUI())
-                NavRoutes.TEAMS -> TeamsScreen(padding)
+                NavRoutes.CALENDAR -> CalendarContent(
+                    matches = DataMock.MATCHES.toCard(),
+                    navigateToMatchDetail = {}
+                )
+
+                NavRoutes.TEAMS -> TeamsContent(
+                    teams = DataMock.TEAMS.toCard(),
+                    navigateToTeamDetail = {})
             }
         }
     }

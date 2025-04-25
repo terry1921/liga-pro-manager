@@ -1,6 +1,7 @@
 package dev.terryrockstar.ligapromanager.utils
 
 import dev.terryrockstar.core.database.entity.MatchEntity
+import dev.terryrockstar.core.database.entity.TeamEntity
 import dev.terryrockstar.core.model.standings.TeamStanding
 
 data object DataMock {
@@ -23,7 +24,26 @@ data object DataMock {
         TeamStanding(16, "Tigres", 15, 2, 0, 13, 24, 62, points = 6)
     )
     val MATCHES = listOf(
-        MatchEntity(homeTeam = "Loros FC", awayTeam = "Tigres", date = "Dom 20 Abr"),
-        MatchEntity(homeTeam = "Galacticos", awayTeam = "Jaguares", date = "Dom 27 Abr")
+        MatchEntity(homeTeam = "Loros FC", awayTeam = "Tigres", date = "Dom 20 Abr", time = "12:00", location = "Campo 4, Don Manuel"),
+        MatchEntity(homeTeam = "Galacticos", awayTeam = "Jaguares", date = "Dom 27 Abr", time = "12:00", location = "Campo 1, Don Manuel"),
+    )
+
+    val TEAMS = listOf(
+        TeamEntity(id = 1, name = "La bomba"),
+        TeamEntity(id = 2, name = "Makina"),
+        TeamEntity(id = 3, name = "Reimon"),
+        TeamEntity(id = 4, name = "Chape"),
+        TeamEntity(id = 5, name = "Cardenas"),
+        TeamEntity(id = 6, name = "Carrillo"),
+        TeamEntity(id = 7, name = "RC"),
+        TeamEntity(id = 8, name = "Juventus"),
+        TeamEntity(id = 9, name = "Loros F.C."),
+        TeamEntity(id = 10, name = "Divenca"),
+        TeamEntity(id = 11, name = "Borusia"),
+        TeamEntity(id = 12, name = "Lotto"),
+        TeamEntity(id = 13, name = "Fox"),
+        TeamEntity(id = 14, name = "Villas"),
+        TeamEntity(id = 15, name = "San roque"),
+        TeamEntity(id = 16, name = "Tigres"),
     )
 }

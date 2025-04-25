@@ -20,12 +20,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.terryrockstar.core.model.match.MatchUi
+import dev.terryrockstar.core.model.match.MatchData
 import dev.terryrockstar.ligapromanager.ui.theme.LigaProTheme
 import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
 
 @Composable
-fun MatchCard(match: MatchUi) {
+fun MatchCard(match: MatchData, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -33,7 +33,7 @@ fun MatchCard(match: MatchUi) {
         color = MaterialTheme.colorScheme.tertiaryContainer,
         tonalElevation = 2.dp,
         shadowElevation = 2.dp,
-        onClick = { /* Navegar al detalle del partido */ }
+        onClick = onClick
     ) {
         Column(modifier = Modifier.padding(Dimens.size4)) {
             Row(
@@ -67,10 +67,12 @@ fun MatchCard(match: MatchUi) {
 fun MatchCardPreview() {
     LigaProTheme {
         MatchCard(
-            match = MatchUi(
+            match = MatchData(
+                id = 1,
                 title = "Loros FC vs Tigres",
                 date = "Dom 20 Abr"
-            )
+            ),
+            onClick = {}
         )
     }
 }

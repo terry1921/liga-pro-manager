@@ -3,9 +3,8 @@ package dev.terryrockstar.ligapromanager.calendar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.terryrockstar.core.database.entity.MatchEntity
 import dev.terryrockstar.core.database.match.MatchRepository
-import dev.terryrockstar.core.model.match.MatchUi
+import dev.terryrockstar.core.model.match.MatchData
 import dev.terryrockstar.ligapromanager.utils.DataMock
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +17,7 @@ class CalendarViewModel @Inject constructor(
     private val repository: MatchRepository
 ) : ViewModel() {
 
-    val matches: StateFlow<List<MatchUi>> =
+    val matches: StateFlow<List<MatchData>> =
         repository.getMatches()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
