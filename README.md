@@ -62,7 +62,7 @@ Ejecuta el script de instalación automática:
 ```bash
 ./setup.sh
 ```
-Este script:"
+Este script:
 - Instala pre-commit si no está instalado.
 - Instala dependencias npm necesarias (commitlint y configuración).
 - Registra los hooks en tu repositorio
