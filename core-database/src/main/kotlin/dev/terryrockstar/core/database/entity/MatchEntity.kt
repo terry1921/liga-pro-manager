@@ -15,7 +15,7 @@ data class MatchEntity(
     @ColumnInfo(defaultValue = "'")
     val time: String = "",
     @ColumnInfo(defaultValue = "''")
-    val location: String = "",
+    val location: String = ""
 ) {
     fun toCard() = MatchData(
         id = id,
@@ -24,10 +24,8 @@ data class MatchEntity(
     )
 }
 
-fun List<MatchEntity>.toCard(): List<MatchData> {
-    return this.map { match ->
-        match.toCard()
-    }
+fun List<MatchEntity>.toCard(): List<MatchData> = this.map { match ->
+    match.toCard()
 }
 
 fun MatchEntity.toDetailUi(): MatchDetailData = MatchDetailData(
@@ -36,5 +34,5 @@ fun MatchEntity.toDetailUi(): MatchDetailData = MatchDetailData(
     awayTeam = awayTeam,
     date = date,
     time = time ?: "",
-    location = location ?: "",
+    location = location ?: ""
 )

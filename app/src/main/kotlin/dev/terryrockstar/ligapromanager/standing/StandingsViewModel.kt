@@ -6,19 +6,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.terryrockstar.core.database.standings.TeamStandingRepository
 import dev.terryrockstar.core.model.standings.TeamStanding
 import dev.terryrockstar.ligapromanager.utils.DataMock
+import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
-class StandingsViewModel @Inject constructor(
-    private val repository: TeamStandingRepository
-) : ViewModel() {
-
+class StandingsViewModel
+@Inject
+constructor(private val repository: TeamStandingRepository) :
+    ViewModel() {
     val standings: StateFlow<List<TeamStanding>> =
-        repository.getStandings()
+        repository
+            .getStandings()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     fun preloadData() {

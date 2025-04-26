@@ -6,5 +6,5 @@ data class MatchDetailData(
     val awayTeam: String,
     val date: String,
     val time: String,
-    val location: String,
+    val location: String
 )

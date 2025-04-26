@@ -91,26 +91,32 @@ fun MainScreen() {
             }
             composable(NavRoutes.CALENDAR) {
                 CalendarScreen(paddingValues, navigateToMatchDetail = { matchId ->
-                    navController.navigate("matchDetail/${matchId}")
+                    navController.navigate("matchDetail/$matchId")
                 })
             }
             composable(NavRoutes.TEAMS) {
                 TeamsScreen(paddingValues, navigateToTeamDetail = { teamId ->
-                    navController.navigate("teamDetail/${teamId}")
+                    navController.navigate("teamDetail/$teamId")
                 })
             }
             composable(
-                "matchDetail/{matchId}", arguments = listOf(
+                "matchDetail/{matchId}",
+                arguments =
+                listOf(
                     navArgument("matchId") { type = NavType.IntType }
-                )) { backStackEntry ->
+                )
+            ) { backStackEntry ->
                 val matchId = backStackEntry.arguments?.getInt("matchId") ?: return@composable
                 MatchDetailScreen(matchId = matchId)
             }
 
             composable(
-                "teamDetail/{teamId}", arguments = listOf(
-                navArgument("teamId") { type = NavType.IntType }
-            )) { backStack ->
+                "teamDetail/{teamId}",
+                arguments =
+                listOf(
+                    navArgument("teamId") { type = NavType.IntType }
+                )
+            ) { backStack ->
                 val teamId = backStack.arguments?.getInt("teamId") ?: return@composable
                 TeamDetailScreen(teamId = teamId)
             }
@@ -120,16 +126,13 @@ fun MainScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarWithNavigation(
-    currentRoute: String,
-    showBack: Boolean,
-    onBack: () -> Unit
-) {
-    val title = when (currentRoute) {
-        NavRoutes.CALENDAR -> "Calendario"
-        NavRoutes.TEAMS -> "Equipos"
-        else -> "Liga Pro-Manager"
-    }
+fun TopAppBarWithNavigation(currentRoute: String, showBack: Boolean, onBack: () -> Unit) {
+    val title =
+        when (currentRoute) {
+            NavRoutes.CALENDAR -> "Calendario"
+            NavRoutes.TEAMS -> "Equipos"
+            else -> "Liga Pro-Manager"
+        }
     TopAppBar(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -154,11 +157,12 @@ fun TopAppBarWithNavigation(
 
 @Composable
 fun BottomNavBar(navController: NavHostController, currentRoute: String?) {
-    val items = listOf(
-        NavItem("Calendario", Icons.Default.DateRange, NavRoutes.CALENDAR),
-        NavItem("Equipos", Icons.Default.Groups, NavRoutes.TEAMS),
-        NavItem("Estadísticas", Icons.Default.BarChart, NavRoutes.STANDINGS)
-    )
+    val items =
+        listOf(
+            NavItem("Calendario", Icons.Default.DateRange, NavRoutes.CALENDAR),
+            NavItem("Equipos", Icons.Default.Groups, NavRoutes.TEAMS),
+            NavItem("Estadísticas", Icons.Default.BarChart, NavRoutes.STANDINGS)
+        )
 
     NavigationBar(containerColor = colorScheme.secondary) {
         items.forEach { item ->
@@ -175,23 +179,20 @@ fun BottomNavBar(navController: NavHostController, currentRoute: String?) {
                 icon = { Icon(item.icon, contentDescription = item.label) },
                 label = { Text(item.label) },
                 alwaysShowLabel = true,
-                colors = NavigationBarItemDefaults.colors(
+                colors =
+                NavigationBarItemDefaults.colors(
                     selectedIconColor = colorScheme.outlineVariant,
                     unselectedIconColor = colorScheme.outline,
                     selectedTextColor = colorScheme.outlineVariant,
                     unselectedTextColor = colorScheme.outline,
-                    indicatorColor = Color.Transparent,
+                    indicatorColor = Color.Transparent
                 )
             )
         }
     }
 }
 
-data class NavItem(
-    val label: String,
-    val icon: ImageVector,
-    val route: String
-)
+data class NavItem(val label: String, val icon: ImageVector, val route: String)
 
 @Composable
 fun PreviewScreenForRoute(currentRoute: String) {
@@ -214,14 +215,17 @@ fun PreviewScreenForRoute(currentRoute: String) {
             when (currentRoute) {
                 NavRoutes.STANDINGS -> StandingsContent(teams = DataMock.TEAMS_STANDINGS)
 
-                NavRoutes.CALENDAR -> CalendarContent(
-                    matches = DataMock.MATCHES.toCard(),
-                    navigateToMatchDetail = {}
-                )
+                NavRoutes.CALENDAR ->
+                    CalendarContent(
+                        matches = DataMock.MATCHES.toCard(),
+                        navigateToMatchDetail = {}
+                    )
 
-                NavRoutes.TEAMS -> TeamsContent(
-                    teams = DataMock.TEAMS.toCard(),
-                    navigateToTeamDetail = {})
+                NavRoutes.TEAMS ->
+                    TeamsContent(
+                        teams = DataMock.TEAMS.toCard(),
+                        navigateToTeamDetail = {}
+                    )
             }
         }
     }

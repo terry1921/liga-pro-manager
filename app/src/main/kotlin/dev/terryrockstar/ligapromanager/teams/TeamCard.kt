@@ -19,19 +19,18 @@ import dev.terryrockstar.core.model.team.TeamData
 import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
 
 @Composable
-fun TeamCard(
-    team: TeamData,
-    onClick: () -> Unit
-) {
+fun TeamCard(team: TeamData, onClick: () -> Unit) {
     Surface(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(Dimens.size3))
             .clickable { onClick() },
         color = MaterialTheme.colorScheme.surfaceVariant
     ) {
         Row(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(Dimens.size4),
             verticalAlignment = Alignment.CenterVertically

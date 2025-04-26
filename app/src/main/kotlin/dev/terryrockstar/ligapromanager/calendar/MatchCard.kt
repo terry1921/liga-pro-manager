@@ -27,7 +27,8 @@ import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
 @Composable
 fun MatchCard(match: MatchData, onClick: () -> Unit) {
     Surface(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(Dimens.size3)),
         color = MaterialTheme.colorScheme.tertiaryContainer,
@@ -67,7 +68,8 @@ fun MatchCard(match: MatchData, onClick: () -> Unit) {
 fun MatchCardPreview() {
     LigaProTheme {
         MatchCard(
-            match = MatchData(
+            match =
+            MatchData(
                 id = 1,
                 title = "Loros FC vs Tigres",
                 date = "Dom 20 Abr"

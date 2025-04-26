@@ -6,5 +6,5 @@ data class PlayerData(
     val number: Int,
     val goals: Int,
     val yellowCards: Int,
-    val redCards: Int,
+    val redCards: Int
 )
