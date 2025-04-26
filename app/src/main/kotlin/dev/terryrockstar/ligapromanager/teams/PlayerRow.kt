@@ -17,7 +17,8 @@ import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
 @Composable
 fun PlayerRow(player: PlayerData) {
     Row(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(Dimens.size2))
             .background(MaterialTheme.colorScheme.surfaceVariant)

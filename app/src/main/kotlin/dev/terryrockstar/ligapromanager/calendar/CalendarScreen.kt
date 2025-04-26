@@ -38,7 +38,8 @@ fun CalendarScreen(
 @Composable
 fun CalendarContent(matches: List<MatchData>, navigateToMatchDetail: (Int) -> Unit) {
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize()
             .padding(horizontal = Dimens.size4, vertical = Dimens.size5)
     ) {
@@ -66,4 +67,3 @@ fun CalendarContent(matches: List<MatchData>, navigateToMatchDetail: (Int) -> Un
         )
     }
 }
-

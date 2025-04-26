@@ -6,19 +6,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.terryrockstar.core.database.match.MatchRepository
 import dev.terryrockstar.core.model.match.MatchData
 import dev.terryrockstar.ligapromanager.utils.DataMock
+import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
-class CalendarViewModel @Inject constructor(
-    private val repository: MatchRepository
-) : ViewModel() {
-
+class CalendarViewModel
+@Inject
+constructor(private val repository: MatchRepository) :
+    ViewModel() {
     val matches: StateFlow<List<MatchData>> =
-        repository.getMatches()
+        repository
+            .getMatches()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     fun preload() {

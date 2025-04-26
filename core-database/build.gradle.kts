@@ -22,10 +22,11 @@ android {
         consumerProguardFiles("consumer-rules.pro")
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments += mapOf(
-                    "room.schemaLocation" to "$projectDir/schemas",
-                    "room.expandProjection" to "true"
-                )
+                arguments +=
+                    mapOf(
+                        "room.schemaLocation" to "$projectDir/schemas",
+                        "room.expandProjection" to "true"
+                    )
             }
         }
     }

@@ -24,7 +24,8 @@ import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
 @Composable
 fun TopScorerCard(name: String, team: String, goals: Int) {
     Surface(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(Dimens.size3)),
         color = MaterialTheme.colorScheme.tertiaryContainer,
@@ -33,7 +34,8 @@ fun TopScorerCard(name: String, team: String, goals: Int) {
         onClick = { /* Detalle del jugador */ }
     ) {
         Row(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(Dimens.size4),
             verticalAlignment = Alignment.CenterVertically

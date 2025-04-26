@@ -12,4 +12,3 @@ data class TeamStanding(
     val goalDifference: Int = goalsFor - goalsAgainst,
     val points: Int
 )
-

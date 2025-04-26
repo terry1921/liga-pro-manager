@@ -13,7 +13,12 @@ import dev.terryrockstar.core.database.entity.TeamEntity
 import dev.terryrockstar.core.database.entity.TeamStandingEntity
 
 @Database(
-    entities = [TeamStandingEntity::class, MatchEntity::class, TeamEntity::class, PlayerEntity::class],
+    entities = [
+        TeamStandingEntity::class,
+        MatchEntity::class,
+        TeamEntity::class,
+        PlayerEntity::class
+    ],
     version = 2,
     exportSchema = true,
     autoMigrations = [
@@ -22,6 +27,7 @@ import dev.terryrockstar.core.database.entity.TeamStandingEntity
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun teamStandingDao(): TeamStandingDao
+
     abstract fun matchDao(): MatchDao
 
     abstract fun teamDao(): TeamDao

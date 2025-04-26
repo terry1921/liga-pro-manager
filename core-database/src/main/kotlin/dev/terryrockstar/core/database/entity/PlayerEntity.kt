@@ -12,7 +12,7 @@ data class PlayerEntity(
     val number: Int,
     val goals: Int,
     val yellowCards: Int,
-    val redCards: Int,
+    val redCards: Int
 )
 
 fun PlayerEntity.toCard() = PlayerData(id, name, number, goals, yellowCards, redCards)

@@ -17,11 +17,26 @@ data class TeamStandingEntity(
     val points: Int
 ) {
     fun toModel() = TeamStanding(
-        position, name, played, wins, draws, losses, goalsFor, goalsAgainst,
+        position,
+        name,
+        played,
+        wins,
+        draws,
+        losses,
+        goalsFor,
+        goalsAgainst,
         points = points
     )
 }
 
 fun TeamStanding.toEntity(): TeamStandingEntity = TeamStandingEntity(
-    name, position, played, wins, draws, losses, goalsFor, goalsAgainst, points
+    name,
+    position,
+    played,
+    wins,
+    draws,
+    losses,
+    goalsFor,
+    goalsAgainst,
+    points
 )

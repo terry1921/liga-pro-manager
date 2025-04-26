@@ -39,10 +39,7 @@ import dev.terryrockstar.ligapromanager.utils.DataMock
 import timber.log.Timber
 
 @Composable
-fun StandingsScreen(
-    paddingValues: PaddingValues,
-    viewModel: StandingsViewModel = hiltViewModel()
-) {
+fun StandingsScreen(paddingValues: PaddingValues, viewModel: StandingsViewModel = hiltViewModel()) {
     Timber.tag("PaddingValues").d("padding values -> $paddingValues")
     val teams by viewModel.standings.collectAsState()
     LaunchedEffect(Unit) { viewModel.preloadData() }
@@ -50,12 +47,10 @@ fun StandingsScreen(
 }
 
 @Composable
-fun StandingsContent(
-    teams: List<TeamStanding>,
-    modifier: Modifier = Modifier
-) {
+fun StandingsContent(teams: List<TeamStanding>, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
+        modifier =
+        modifier
             .padding(Dimens.size4)
             .fillMaxSize()
     ) {
@@ -75,10 +70,12 @@ private fun SearchTeamBox() {
             Icon(Icons.Default.Search, contentDescription = "Buscar")
         },
         placeholder = { Text("Buscar equipo") },
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(Dimens.size3)),
-        colors = OutlinedTextFieldDefaults.colors(
+        colors =
+        OutlinedTextFieldDefaults.colors(
             focusedContainerColor = colorScheme.secondary,
             unfocusedContainerColor = colorScheme.secondary,
             unfocusedPlaceholderColor = Color.White,
@@ -95,23 +92,26 @@ private fun SearchTeamBox() {
 @Composable
 fun StandingsTable(teams: List<TeamStanding>) {
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .clip(RoundedCornerShape(Dimens.size4))
             .background(colorScheme.tertiaryContainer)
             .padding(vertical = Dimens.size2)
             .fillMaxWidth()
     ) {
         Text(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth(),
             text = "Tabla de Posiciones",
             style = MaterialTheme.typography.titleLarge,
             color = colorScheme.scrim,
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(Dimens.size2))
         Row(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .background(colorScheme.tertiary)
         ) {
@@ -151,20 +151,25 @@ fun RowScope.TableCell(
     isHeader: Boolean = false
 ) {
     Text(
-        modifier = Modifier
+        modifier =
+        Modifier
             .weight(weight)
             .padding(Dimens.size1),
         text = text,
         color = colorScheme.scrim,
         textAlign = if (isName) TextAlign.Start else TextAlign.Center,
-        style = if (isHeader) MaterialTheme.typography.titleSmall else MaterialTheme.typography.bodySmall,
+        style = if (isHeader) {
+            MaterialTheme.typography.titleSmall
+        } else {
+            MaterialTheme.typography.bodySmall
+        }
     )
 }
 
 @Preview(name = "Standings Table - Dark Mode")
 @Composable
 fun PreviewStandingsScreen() {
-    LigaProTheme() {
+    LigaProTheme {
         StandingsTable(DataMock.TEAMS_STANDINGS)
     }
 }
@@ -172,7 +177,7 @@ fun PreviewStandingsScreen() {
 @Preview(name = "Standings Table")
 @Composable
 fun PreviewSearchTeamBox() {
-    LigaProTheme() {
+    LigaProTheme {
         SearchTeamBox()
     }
 }

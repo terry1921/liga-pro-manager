@@ -96,3 +96,6 @@ lint/tmp/
 .idea/sonarlint
 .idea/sonarlint/issuestore
 .idea/sonarlint/issuestore/index.pb
+
+# node modules
+node_modules/
