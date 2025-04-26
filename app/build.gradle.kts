@@ -3,11 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.compose.compiler)
-    id(
-        libs.plugins.hilt.plugin
-            .get()
-            .pluginId
-    )
+    alias(libs.plugins.hilt.plugin)
     alias(libs.plugins.ksp)
 }
 
