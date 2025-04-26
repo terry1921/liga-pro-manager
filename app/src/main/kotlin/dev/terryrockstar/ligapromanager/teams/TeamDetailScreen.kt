@@ -27,7 +27,8 @@ fun TeamDetailScreen(
 
     team?.let {
         Column(
-            modifier = modifier
+            modifier =
+            modifier
                 .fillMaxSize()
                 .padding(Dimens.size4)
         ) {

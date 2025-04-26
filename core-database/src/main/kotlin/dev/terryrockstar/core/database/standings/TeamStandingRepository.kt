@@ -7,11 +7,12 @@ import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class TeamStandingRepository @Inject constructor(
-    private val dao: TeamStandingDao
-) {
-    fun getStandings(): Flow<List<TeamStanding>> =
-        dao.getAllStandings().map { list -> list.map { it.toModel() } }
+class TeamStandingRepository
+@Inject
+constructor(private val dao: TeamStandingDao) {
+    fun getStandings(): Flow<List<TeamStanding>> = dao.getAllStandings().map { list ->
+        list.map { it.toModel() }
+    }
 
     suspend fun insertStandings(list: List<TeamStanding>) {
         dao.insertAll(list.map { it.toEntity() })

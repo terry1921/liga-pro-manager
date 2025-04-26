@@ -34,9 +34,9 @@ fun TeamsScreen(
 
 @Composable
 fun TeamsContent(teams: List<TeamData>, navigateToTeamDetail: (Int) -> Unit) {
-
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize()
             .padding(horizontal = Dimens.size4, vertical = Dimens.size5)
     ) {
@@ -60,11 +60,12 @@ fun TeamsContent(teams: List<TeamData>, navigateToTeamDetail: (Int) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewTeamsScreen() {
-    val fakeTeams = listOf(
-        TeamData(1, "Loros F.C."),
-        TeamData(2, "Galácticos"),
-        TeamData(3, "Juventus")
-    )
+    val fakeTeams =
+        listOf(
+            TeamData(1, "Loros F.C."),
+            TeamData(2, "Galácticos"),
+            TeamData(3, "Juventus")
+        )
     LigaProTheme {
         Column {
             fakeTeams.forEach {

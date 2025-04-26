@@ -19,7 +19,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
@@ -36,8 +35,7 @@ object AppModule {
     fun provideMatchDao(db: AppDatabase): MatchDao = db.matchDao()
 
     @Provides
-    fun provideMatchRepository(dao: MatchDao): MatchRepository =
-        MatchRepository(dao)
+    fun provideMatchRepository(dao: MatchDao): MatchRepository = MatchRepository(dao)
 
     @Provides
     fun provideTeamDao(db: AppDatabase): TeamDao = db.teamDao()
@@ -46,6 +44,6 @@ object AppModule {
     fun providePlayerDao(db: AppDatabase): PlayerDao = db.playerDao()
 
     @Provides
-    fun provideTeamRepository(teamDao: TeamDao, playerDao: PlayerDao): TeamRepository = TeamRepository(teamDao, playerDao)
-
+    fun provideTeamRepository(teamDao: TeamDao, playerDao: PlayerDao): TeamRepository =
+        TeamRepository(teamDao, playerDao)
 }

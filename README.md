@@ -51,6 +51,90 @@ Cada módulo tiene responsabilidad única y puede evolucionar de forma independi
 
 ---
 
+## ⚡️ Pre-Commit Hooks y Commitlint
+
+Este proyecto utiliza pre-commit para asegurar la calidad del código antes de subir cambios al repositorio, y commitlint para validar los mensajes de commit siguiendo las convenciones Angular.
+
+### 📦 Instalación rápida
+
+Ejecuta el script de instalación automática:
+
+```bash
+./setup.sh
+```
+Este script:
+- Instala pre-commit si no está instalado.
+- Instala dependencias npm necesarias (commitlint y configuración).
+- Registra los hooks en tu repositorio
+
+### 🛡️ Hooks configurados
+
+Cada vez que hagas git commit, automáticamente se ejecutarán:
+
+• ktlint: Formatea automáticamente el código Kotlin.
+• validate-gradle: Valida que los archivos build.gradle.kts y settings.gradle.kts estén correctos.
+• run-unit-tests: Corre las pruebas unitarias (./gradlew testDebugUnitTest).
+• commitlint: Valida que tu mensaje de commit siga la convención Angular.
+
+Si alguno de los hooks falla, se cancelará el commit.
+
+### ✏️ Convenciones de Mensajes de Commit (Commitlint)
+
+Debes escribir tus mensajes siguiendo esta estructura:
+
+```php
+<tipo>(<alcance>): <descripción breve>
+```
+#### Tipos válidos:
+- `feat`: Una nueva funcionalidad.
+- `fix`: Un bug corregido.
+- `docs`: Cambios en la documentación.
+- `style`: Cambios de formato (sin cambios de lógica).
+- `refactor`: Refactorización de código (sin cambios de funcionalidad).
+- `test`: Cambios relacionados a tests.
+- `chore`: Tareas de mantenimiento.
+
+#### Ejemplos correctos ✅:
+
+```bash
+feat: add user authentication
+fix: correct login error
+docs: update API usage section
+style: format HomeScreen layout
+refactor: simplify repository calls
+test: add tests for LoginViewModel
+chore: update dependencies
+```
+
+
+#### Ejemplos incorrectos ❌:
+
+```bash
+added new feature
+Fix login crash
+bugfix: wrong password validation
+style corrected
+update stuff
+```
+
+### 💡 Notas adicionales
+
+- Asegúrate de tener pip, npm, y node instalados en tu máquina.
+- Si alguna validación falla, corrígela y vuelve a intentar hacer commit.
+- Puedes correr manualmente todos los hooks antes de commitear:
+```bash
+pre-commit run --all-files"
+```
+
+### 🚀 Beneficios
+- Código limpio y formateado automáticamente.
+- Builds de Gradle validados antes de integrarlos.
+- Pruebas ejecutadas automáticamente.
+- Mensajes de commit consistentes y entendibles.
+- Mayor calidad de código y menos errores en producción.
+
+### ¡Feliz coding! 🎯
+
 ## 📱 Capturas de pantalla
 
 *(Agrega aquí imágenes de la app si ya están disponibles)*
