@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
-class TeamRepository
+class TeamLocalSource
 @Inject
 constructor(
     private val teamDao: TeamDao,

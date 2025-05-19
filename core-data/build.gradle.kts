@@ -43,11 +43,6 @@ dependencies {
     testImplementation(libs.coroutines)
     testImplementation(libs.coroutines.test)
 
-    // network
-    implementation(libs.sandwich)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
-
     // di
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

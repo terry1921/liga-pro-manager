@@ -7,7 +7,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class MatchRepository
+class MatchLocalSource
 @Inject
 constructor(private val matchDao: MatchDao) {
     fun getMatches(): Flow<List<MatchData>> = matchDao.getAllMatches().map {

@@ -3,7 +3,7 @@ package dev.terryrockstar.ligapromanager.calendar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.terryrockstar.core.database.match.MatchRepository
+import dev.terryrockstar.core.database.match.MatchLocalSource
 import dev.terryrockstar.core.model.match.MatchData
 import dev.terryrockstar.ligapromanager.utils.DataMock
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class CalendarViewModel
 @Inject
-constructor(private val repository: MatchRepository) :
+constructor(private val repository: MatchLocalSource) :
     ViewModel() {
     val matches: StateFlow<List<MatchData>> =
         repository

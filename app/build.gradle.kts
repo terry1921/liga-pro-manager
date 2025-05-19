@@ -118,9 +118,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     debugImplementation(libs.compose.ui.tooling)
 
-    // data binding
-    implementation(libs.bindables)
-
     // di
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
@@ -141,13 +138,7 @@ dependencies {
     implementation(libs.bundler)
 
     // customViews
-    implementation(libs.recyclerview)
-    implementation(libs.baseAdapter)
-    implementation(libs.progressView)
     implementation(libs.glide)
-
-    // transformation animation
-    implementation(libs.transformationLayout)
 
     // unit test
     testImplementation(libs.junit)
