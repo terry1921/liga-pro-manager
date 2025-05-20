@@ -1,6 +1,7 @@
 package dev.terryrockstar.core.model.standings
 
 data class TeamStanding(
+    val id: Int = 0,
     val position: Int,
     val name: String,
     val played: Int,

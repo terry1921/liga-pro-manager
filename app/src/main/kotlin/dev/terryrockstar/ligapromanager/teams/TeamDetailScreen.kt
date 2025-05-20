@@ -10,11 +10,10 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import dev.terryrockstar.core.data.utils.DataMock
 import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
 
 @Composable
@@ -23,7 +22,8 @@ fun TeamDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: TeamDetailViewModel = hiltViewModel()
 ) {
-    val team by viewModel.getTeamDetail(teamId).collectAsState(initial = null)
+    // val team by viewModel.getTeamDetail(teamId).collectAsState(initial = null)
+    val team = DataMock.TEAM_DETAIL
 
     team?.let {
         Column(
@@ -41,10 +41,10 @@ fun TeamDetailScreen(
             Text("Jugadores", style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(Dimens.size2))
 
-            it.players.forEach { player ->
+            /*it.players.forEach { player ->
                 PlayerRow(player)
                 Spacer(modifier = Modifier.height(Dimens.size1))
-            }
+            }*/
         }
     } ?: run {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

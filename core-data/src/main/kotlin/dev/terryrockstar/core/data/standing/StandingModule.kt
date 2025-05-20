@@ -4,12 +4,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class StandingModule {
+internal fun interface StandingModule {
     @Binds
-    @Singleton
-    abstract fun bindStandingUseCase(standingUseCase: StandingUseCaseImp): StandingUseCase
+    fun bindStandingUseCase(standingUseCase: StandingUseCaseImpl): StandingUseCase
 }

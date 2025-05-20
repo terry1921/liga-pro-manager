@@ -11,9 +11,6 @@ import dev.terryrockstar.core.database.dao.MatchDao
 import dev.terryrockstar.core.database.dao.PlayerDao
 import dev.terryrockstar.core.database.dao.TeamDao
 import dev.terryrockstar.core.database.dao.TeamStandingDao
-import dev.terryrockstar.core.database.match.MatchLocalSource
-import dev.terryrockstar.core.database.standings.TeamStandingLocalSource
-import dev.terryrockstar.core.database.team.TeamLocalSource
 import javax.inject.Singleton
 
 @Module
@@ -28,22 +25,11 @@ object AppModule {
     fun provideTeamStandingDao(db: AppDatabase): TeamStandingDao = db.teamStandingDao()
 
     @Provides
-    fun provideTeamStandingRepository(dao: TeamStandingDao): TeamStandingLocalSource =
-        TeamStandingLocalSource(dao)
-
-    @Provides
     fun provideMatchDao(db: AppDatabase): MatchDao = db.matchDao()
-
-    @Provides
-    fun provideMatchRepository(dao: MatchDao): MatchLocalSource = MatchLocalSource(dao)
 
     @Provides
     fun provideTeamDao(db: AppDatabase): TeamDao = db.teamDao()
 
     @Provides
     fun providePlayerDao(db: AppDatabase): PlayerDao = db.playerDao()
-
-    @Provides
-    fun provideTeamRepository(teamDao: TeamDao, playerDao: PlayerDao): TeamLocalSource =
-        TeamLocalSource(teamDao, playerDao)
 }

@@ -8,9 +8,6 @@ interface StandingUseCase {
 
     @WorkerThread
     fun getStandings(): Flow<StandingRepositoryState>
-
-    @WorkerThread
-    fun insertStandings(list: List<TeamStanding>): Flow<StandingRepositoryState>
 }
 
 sealed class StandingRepositoryState {

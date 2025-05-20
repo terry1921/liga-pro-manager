@@ -11,6 +11,6 @@ data class TeamEntity(@PrimaryKey(autoGenerate = true) val id: Int = 0, val name
 
 fun TeamData.toEntity(): TeamEntity = TeamEntity(id, name)
 
-fun List<TeamEntity>.toCard(): List<TeamData> = this.map { team ->
+fun List<TeamEntity>.toListCard(): List<TeamData> = this.map { team ->
     team.toCard()
 }

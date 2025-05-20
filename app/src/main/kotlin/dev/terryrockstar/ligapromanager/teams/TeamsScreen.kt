@@ -9,12 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import dev.terryrockstar.core.data.utils.DataMock
 import dev.terryrockstar.core.model.team.TeamData
 import dev.terryrockstar.ligapromanager.ui.theme.LigaProTheme
 import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
@@ -27,8 +25,9 @@ fun TeamsScreen(
     viewModel: TeamsViewModel = hiltViewModel()
 ) {
     Timber.tag("PaddingValues").d("padding values -> $paddingValues")
-    val teams by viewModel.teams.collectAsState()
-    LaunchedEffect(Unit) { viewModel.preloadData() }
+    // val teams by viewModel.teams.collectAsState()
+    val teams = DataMock.TEAMS_DATA
+    // LaunchedEffect(Unit) { viewModel.preloadData() }
     TeamsContent(teams, navigateToTeamDetail)
 }
 

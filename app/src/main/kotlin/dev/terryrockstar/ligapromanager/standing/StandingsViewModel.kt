@@ -8,7 +8,6 @@ import dev.terryrockstar.core.data.standing.StandingUseCase
 import dev.terryrockstar.core.model.standings.TeamStanding
 import dev.terryrockstar.core.network.AppDispatcher
 import dev.terryrockstar.core.network.Dispatcher
-import dev.terryrockstar.ligapromanager.utils.DataMock
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,11 +17,10 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @HiltViewModel
 class StandingsViewModel @Inject constructor(
-    private val useCase: StandingUseCase,
+    private val standingUseCase: StandingUseCase,
     @Dispatcher(AppDispatcher.IO) private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -36,8 +34,8 @@ class StandingsViewModel @Inject constructor(
             initialValue = emptyList()
         )
 
-    fun getAllStandings() = viewModelScope.launch {
-        useCase.getStandings()
+    fun getAllStandings() = viewModelScope.launch(dispatcher) {
+        standingUseCase.getStandings()
             .onStart { }
             .catch { }
             .collect { result ->
@@ -48,12 +46,5 @@ class StandingsViewModel @Inject constructor(
                     }
                 }
             }
-    }
-
-    fun preloadData() = viewModelScope.launch(dispatcher) {
-        if (standings.value.isEmpty()) {
-            Timber.d("Preloading data")
-            useCase.insertStandings(DataMock.TEAMS_STANDINGS)
-        }
     }
 }

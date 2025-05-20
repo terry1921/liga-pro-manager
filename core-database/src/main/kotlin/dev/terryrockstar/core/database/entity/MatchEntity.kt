@@ -24,7 +24,16 @@ data class MatchEntity(
     )
 }
 
-fun List<MatchEntity>.toCard(): List<MatchData> = this.map { match ->
+fun MatchDetailData.toEntity(): MatchEntity = MatchEntity(
+    id = id,
+    homeTeam = homeTeam,
+    awayTeam = awayTeam,
+    date = date,
+    time = time,
+    location = location
+)
+
+fun List<MatchEntity>.toListCard(): List<MatchData> = this.map { match ->
     match.toCard()
 }
 
@@ -33,6 +42,6 @@ fun MatchEntity.toDetailUi(): MatchDetailData = MatchDetailData(
     homeTeam = homeTeam,
     awayTeam = awayTeam,
     date = date,
-    time = time ?: "",
-    location = location ?: ""
+    time = time,
+    location = location
 )

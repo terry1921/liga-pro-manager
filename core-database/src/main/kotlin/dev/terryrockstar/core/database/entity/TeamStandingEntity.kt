@@ -6,7 +6,8 @@ import dev.terryrockstar.core.model.standings.TeamStanding
 
 @Entity(tableName = "standings")
 data class TeamStandingEntity(
-    @PrimaryKey val name: String,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val name: String,
     val position: Int,
     val played: Int,
     val wins: Int,
@@ -17,6 +18,7 @@ data class TeamStandingEntity(
     val points: Int
 ) {
     fun toModel() = TeamStanding(
+        id,
         position,
         name,
         played,
@@ -25,11 +27,13 @@ data class TeamStandingEntity(
         losses,
         goalsFor,
         goalsAgainst,
-        points = points
+        goalDifference = goalsFor - goalsAgainst,
+        points
     )
 }
 
 fun TeamStanding.toEntity(): TeamStandingEntity = TeamStandingEntity(
+    id,
     name,
     position,
     played,

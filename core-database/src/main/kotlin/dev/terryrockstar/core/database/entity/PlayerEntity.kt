@@ -13,6 +13,26 @@ data class PlayerEntity(
     val goals: Int,
     val yellowCards: Int,
     val redCards: Int
-)
+) {
+    fun toCard() = PlayerData(
+        id,
+        teamId,
+        name,
+        number,
+        goals,
+        yellowCards,
+        redCards
+    )
+}
 
-fun PlayerEntity.toCard() = PlayerData(id, name, number, goals, yellowCards, redCards)
+fun List<PlayerEntity>.toListCards(): List<PlayerData> = this.map { it.toCard() }
+
+fun PlayerData.toEntity(): PlayerEntity = PlayerEntity(
+    id = id,
+    teamId = teamId,
+    name = name,
+    number = number,
+    goals = goals,
+    yellowCards = yellowCards,
+    redCards = redCards
+)
