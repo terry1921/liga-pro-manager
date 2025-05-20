@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class StandingsViewModel @Inject constructor(
@@ -27,7 +28,9 @@ class StandingsViewModel @Inject constructor(
     private val _standings: MutableStateFlow<List<TeamStanding>> = MutableStateFlow(emptyList())
     val standings: StateFlow<List<TeamStanding>> = _standings
         .onStart { getAllStandings() }
-        .catch { }
+        .catch { exception ->
+            Timber.e(exception, "Error in standings flow")
+        }
         .stateIn(
             viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
@@ -37,7 +40,9 @@ class StandingsViewModel @Inject constructor(
     fun getAllStandings() = viewModelScope.launch(dispatcher) {
         standingUseCase.getStandings()
             .onStart { }
-            .catch { }
+            .catch { exception ->
+                Timber.e(exception, "Error in standings flow")
+            }
             .collect { result ->
                 when (result) {
                     StandingRepositoryState.Empty -> {}
