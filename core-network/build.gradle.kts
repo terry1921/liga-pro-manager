@@ -56,12 +56,8 @@ dependencies {
     testImplementation(libs.coroutines.test)
 
     // network
-    implementation(libs.sandwich)
-
     implementation(libs.okhttp)
     implementation(libs.okhttp.urlconnection)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
     testImplementation(libs.okhttp.mockserver)
     testImplementation(libs.androidx.arch.core)
 

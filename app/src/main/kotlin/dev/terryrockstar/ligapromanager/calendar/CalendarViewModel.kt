@@ -3,30 +3,42 @@ package dev.terryrockstar.ligapromanager.calendar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.terryrockstar.core.database.match.MatchRepository
+import dev.terryrockstar.core.database.match.MatchLocalSource
 import dev.terryrockstar.core.model.match.MatchData
-import dev.terryrockstar.ligapromanager.utils.DataMock
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class CalendarViewModel
 @Inject
-constructor(private val repository: MatchRepository) :
+constructor(private val repository: MatchLocalSource) :
     ViewModel() {
-    val matches: StateFlow<List<MatchData>> =
-        repository
-            .getMatches()
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    private val _matches: MutableStateFlow<List<MatchData>> = MutableStateFlow(emptyList())
+    val matches: StateFlow<List<MatchData>> = _matches
+        .onStart { getAllMatches() }
+        .catch { }
+        .stateIn(
+            viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = emptyList()
+        )
+
+    fun getAllMatches() = viewModelScope.launch {
+        repository.getCardMatches()
+    }
 
     fun preload() {
         viewModelScope.launch {
             if (matches.value.isEmpty()) {
                 // Preload data only if the matches are empty
-                repository.preload(DataMock.MATCHES)
+                // repository.saveMatches(DataMock.MATCHES)
             }
         }
     }

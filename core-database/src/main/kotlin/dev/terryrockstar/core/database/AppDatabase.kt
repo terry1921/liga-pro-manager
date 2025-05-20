@@ -19,10 +19,10 @@ import dev.terryrockstar.core.database.entity.TeamStandingEntity
         TeamEntity::class,
         PlayerEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = true,
     autoMigrations = [
-        AutoMigration(from = 1, to = 2) // Example migration, adjust as needed
+        AutoMigration(from = 2, to = 3) // Example migration, adjust as needed
     ]
 )
 abstract class AppDatabase : RoomDatabase() {

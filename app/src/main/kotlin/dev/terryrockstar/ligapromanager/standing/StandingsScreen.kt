@@ -20,7 +20,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,17 +31,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import dev.terryrockstar.core.data.utils.DataMock
 import dev.terryrockstar.core.model.standings.TeamStanding
 import dev.terryrockstar.ligapromanager.ui.theme.LigaProTheme
 import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
-import dev.terryrockstar.ligapromanager.utils.DataMock
 import timber.log.Timber
 
 @Composable
 fun StandingsScreen(paddingValues: PaddingValues, viewModel: StandingsViewModel = hiltViewModel()) {
     Timber.tag("PaddingValues").d("padding values -> $paddingValues")
     val teams by viewModel.standings.collectAsState()
-    LaunchedEffect(Unit) { viewModel.preloadData() }
     StandingsContent(teams)
 }
 

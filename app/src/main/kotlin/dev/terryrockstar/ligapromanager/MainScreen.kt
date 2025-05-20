@@ -38,7 +38,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import dev.terryrockstar.core.database.entity.toCard
+import dev.terryrockstar.core.data.utils.DataMock
+import dev.terryrockstar.core.database.entity.toListCard
 import dev.terryrockstar.ligapromanager.calendar.CalendarContent
 import dev.terryrockstar.ligapromanager.calendar.CalendarScreen
 import dev.terryrockstar.ligapromanager.calendar.MatchDetailScreen
@@ -49,7 +50,6 @@ import dev.terryrockstar.ligapromanager.teams.TeamsContent
 import dev.terryrockstar.ligapromanager.teams.TeamsScreen
 import dev.terryrockstar.ligapromanager.ui.theme.LigaProTheme
 import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
-import dev.terryrockstar.ligapromanager.utils.DataMock
 
 object NavRoutes {
     const val STANDINGS = "standings"
@@ -217,13 +217,13 @@ fun PreviewScreenForRoute(currentRoute: String) {
 
                 NavRoutes.CALENDAR ->
                     CalendarContent(
-                        matches = DataMock.MATCHES.toCard(),
+                        matches = DataMock.MATCHES.toListCard(),
                         navigateToMatchDetail = {}
                     )
 
                 NavRoutes.TEAMS ->
                     TeamsContent(
-                        teams = DataMock.TEAMS.toCard(),
+                        teams = DataMock.TEAMS.toListCard(),
                         navigateToTeamDetail = {}
                     )
             }

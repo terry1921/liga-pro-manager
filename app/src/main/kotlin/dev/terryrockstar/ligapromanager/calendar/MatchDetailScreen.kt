@@ -10,11 +10,10 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import dev.terryrockstar.core.data.utils.DataMock
 import dev.terryrockstar.ligapromanager.ui.tokens.Dimens
 
 @Composable
@@ -23,7 +22,8 @@ fun MatchDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: MatchDetailViewModel = hiltViewModel()
 ) {
-    val match by viewModel.getMatchDetail(matchId).collectAsState(initial = null)
+    // val match by viewModel.getMatchDetail(matchId).collectAsState(initial = null)
+    val match = DataMock.MATCH
 
     match?.let {
         Column(
