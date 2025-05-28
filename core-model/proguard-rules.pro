@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keepclassmembers class * extends java.lang.Object { # Or your base model class
+    public <init>();
+}
+-keepnames class dev.terryrockstar.core.model.** { *; } # Keep names in your model package

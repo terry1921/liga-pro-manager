@@ -27,7 +27,6 @@ data class TeamStandingEntity(
         losses,
         goalsFor,
         goalsAgainst,
-        goalDifference = goalsFor - goalsAgainst,
         points
     )
 }

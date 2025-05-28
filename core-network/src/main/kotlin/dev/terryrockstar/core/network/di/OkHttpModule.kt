@@ -22,33 +22,26 @@ object OkHttpModule {
 
     @Provides
     @Singleton
-    fun provideGson(): Gson {
-        return Gson()
-    }
+    fun provideGson(): Gson = Gson()
 
     @Provides
     @Singleton
-    fun provideNetworkClient(okHttpClientFactory: OkHttpClientFactory): NetworkClient {
-        return OkHttpNetworkClient(okHttpClientFactory.create(isRedirect = false).build())
-    }
+    fun provideNetworkClient(okHttpClientFactory: OkHttpClientFactory): NetworkClient =
+        OkHttpNetworkClient(okHttpClientFactory.create(isRedirect = false).build())
 
     @AssistedFactory
     fun interface OkHttpClientFactory {
         fun create(isRedirect: Boolean): OkHttpClientBuilder
     }
 
-    open class OkHttpClientBuilder @AssistedInject constructor(
-        @Assisted val isRedirect: Boolean
-    ) {
-        fun build(): OkHttpClient {
-            return OkHttpClient.Builder()
-                .addInterceptor(MyInterceptor())
-                .followRedirects(isRedirect)
-                .followSslRedirects(isRedirect)
-                .connectTimeout(Constants.TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                .readTimeout(Constants.TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                .writeTimeout(Constants.TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                .build()
-        }
+    open class OkHttpClientBuilder @AssistedInject constructor(@Assisted val isRedirect: Boolean) {
+        fun build(): OkHttpClient = OkHttpClient.Builder()
+            .addInterceptor(MyInterceptor())
+            .followRedirects(isRedirect)
+            .followSslRedirects(isRedirect)
+            .connectTimeout(Constants.TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
+            .readTimeout(Constants.TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
+            .writeTimeout(Constants.TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
+            .build()
     }
 }

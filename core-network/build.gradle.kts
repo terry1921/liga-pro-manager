@@ -61,6 +61,10 @@ dependencies {
     testImplementation(libs.okhttp.mockserver)
     testImplementation(libs.androidx.arch.core)
 
+    // firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
+
     // json parsing
     implementation(libs.gson)
 

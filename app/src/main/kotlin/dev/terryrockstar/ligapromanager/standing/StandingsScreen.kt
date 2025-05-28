@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.firebase.auth.FirebaseAuth
 import dev.terryrockstar.core.data.utils.DataMock
 import dev.terryrockstar.core.model.standings.TeamStanding
 import dev.terryrockstar.ligapromanager.ui.theme.LigaProTheme
@@ -40,6 +41,8 @@ import timber.log.Timber
 @Composable
 fun StandingsScreen(paddingValues: PaddingValues, viewModel: StandingsViewModel = hiltViewModel()) {
     Timber.tag("PaddingValues").d("padding values -> $paddingValues")
+    // TODO: Remove this line when Firebase Auth is properly initialized in the app
+    FirebaseAuth.getInstance().signInAnonymously() // Ensure Firebase Auth is initialized
     val teams by viewModel.standings.collectAsState()
     StandingsContent(teams)
 }
@@ -132,9 +135,9 @@ fun StandingsTable(teams: List<TeamStanding>) {
                 TableCell(it.wins.toString(), weight = 2f)
                 TableCell(it.draws.toString(), weight = 2f)
                 TableCell(it.losses.toString(), weight = 2f)
-                TableCell(it.goalsAgainst.toString(), weight = 3f)
                 TableCell(it.goalsFor.toString(), weight = 3f)
-                TableCell(it.goalDifference.toString(), weight = 3f)
+                TableCell(it.goalsAgainst.toString(), weight = 3f)
+                TableCell(it.getGoalDifference().toString(), weight = 3f)
                 TableCell(it.points.toString(), weight = 3f)
             }
         }

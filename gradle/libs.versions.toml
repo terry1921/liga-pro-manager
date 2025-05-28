@@ -36,6 +36,8 @@ glide = "4.16.0"
 compose = "1.7.8"
 navigation-compose = "2.9.0"
 material3Android = "1.3.2"
+googleServices = "4.4.2"
+firebasebom = "33.14.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -46,6 +48,7 @@ hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 room  = { id = "androidx.room", version.ref = "androidxRoom" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -71,6 +74,11 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "compose" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
 
+# firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebasebom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 
 # data store
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
